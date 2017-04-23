@@ -20,6 +20,7 @@ public class boardManager : MonoBehaviour {
 
     Vector2 screenSize;
     Vector2 boardSize;
+    Vector2 beadSize;
     public Vector2 boardStartPoint;
     public Vector2 boardSizeNumber;
     public Canvas gameCanvas;
@@ -71,15 +72,17 @@ public class boardManager : MonoBehaviour {
             for (int J = 0; J < (boardWidthNumber ) ; J++) {
                 Debug.Log(i+"/"+J );
                 boardData item = new boardData();
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)boardStartPoint.x, -i * (boardSize.y / boardHeightNumber) + (int)boardStartPoint.y);
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * Screen.width), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
+                
                 item.index = new Vector2(J,i);
                 boardDataArray[J, i] = item;
 
             }
         }
+        beadSize = new Vector2((boardSize.x / boardWidthNumber), (boardSize.y / boardHeightNumber));
         Debug.Log(boardDataArray[0,0].position);
 
     }
@@ -90,6 +93,7 @@ public class boardManager : MonoBehaviour {
         GameObject go = Instantiate(spawnObject, gameCanvas.transform);
         boardDataArray[(int)position.x, (int)position.y].haveBead = go;
         go.GetComponent<RectTransform>().anchoredPosition = boardDataArray[(int)position.x, (int)position.y].positionCenter;
+        go.GetComponent<RectTransform>().sizeDelta = beadSize;
         go.GetComponent<beadScript>().boardIndex = boardDataArray[(int)position.x, (int)position.y].index;
     }
 

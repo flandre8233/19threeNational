@@ -15,6 +15,10 @@ public class npcScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (gamemanager.Static.isWin || gamemanager.Static.isLoss) {
+            return;
+        }
+
         if (!inSpawnCD) {
             StartCoroutine(Example());
         }

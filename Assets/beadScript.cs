@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class beadScript : MonoBehaviour, IPointerClickHandler
 {
     public Vector2 boardIndex;
-    public string type;
+    public type type;
     
 
     public void OnPointerClick(PointerEventData eventData) { //work
@@ -45,12 +45,20 @@ public class beadScript : MonoBehaviour, IPointerClickHandler
         return false;
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    bool inSpawnCD = false;
+    IEnumerator Example() {
+        inSpawnCD = true;
+        yield return new WaitForSeconds(gamemanager.Static.beadExistTime);
+        if (gamemanager.Static.isWin || gamemanager.Static.isLoss) {
+            boardManager.Static.delDataObject(boardIndex);
+        }
+        inSpawnCD = false;
     }
+
+    private void Start() {
+        if (!inSpawnCD) {
+            StartCoroutine(Example());
+        }
+    }
+
 }

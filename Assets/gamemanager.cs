@@ -6,7 +6,8 @@ public class gamemanager : MonoBehaviour {
     public static gamemanager Static;
     public short combo;
     public short totalClick;
-    public string[] allowAttackBeadType;
+    public type[] allowAttackBeadType;
+    public int beadExistTime;
 
     public int playerHP;
     public int playerMaxHP;
