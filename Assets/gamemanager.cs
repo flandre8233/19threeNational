@@ -50,11 +50,18 @@ public class gamemanager : MonoBehaviour {
         
     }
 
-    public void attackEnemy(int damage) {
+    public GameObject findEnemy() {
         if (GameObject.FindGameObjectWithTag("enemy") == null) {
+            return null;
+        }
+        return GameObject.FindGameObjectWithTag("enemy");
+    }
+
+    public void attackEnemy(int damage) {
+        if (findEnemy() == null) {
             return;
         }
-        GameObject enemy = GameObject.FindGameObjectWithTag("enemy");
+        GameObject enemy = findEnemy();
 
         enemy.GetComponent<npcScript>().HP -= damage;
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {

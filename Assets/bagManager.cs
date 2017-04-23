@@ -7,7 +7,9 @@ public enum type
     fire,
     water,
     wind,
-    restone
+    restone,
+    hurt
+
 
 }
 
@@ -63,6 +65,8 @@ public class bagManager : MonoBehaviour {
         GameObject go = Instantiate(spawnObject, gameCanvas.transform);
         boardData.haveBead = go;
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
+        go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
+        go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.SetActive(true);
 
     }
