@@ -11,13 +11,13 @@ public class CardData : MonoBehaviour
 
     public type Type;
 
-    public string cardName { get; set; }
+    public string cardName;
 
-    public int HP { get; set; }
-    public int ATK { get; set; }
-    public int restone { get; set; }
+    public int HP;
+    public int ATK;
+    public int restone;
 
-    public int skill { get; set; }
+    public int skill;
 
     public float Probability { get; set; }
 

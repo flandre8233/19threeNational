@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class teamManager : MonoBehaviour {
+    public static teamManager Static;
     public GameObject[] charBoard = new GameObject[3];
+    public GameObject[] charCard = new GameObject[3];
     public Transform charDisplayBoard;
     short teamNo = 0;
-    
 
-	// Use this for initialization
-	void Start () {
+    private void Awake() {
+        if (Static != null) {
+            Destroy(gameObject);
+        }
+        else {
+            Static = this;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         getItemDetails(teamNo);
         getTeamTotalAbility();
     }
@@ -18,7 +28,9 @@ public class teamManager : MonoBehaviour {
     void getItemDetails(short teamNo ) {
         for (int i = 0; i < charBoard.Length; i++) {
             GameObject go = allCharData.Static.allCardData[playerData.Static.teamDetails[teamNo, i].GetComponent<CardData>().Index];
-            charBoard[i] = createCardBig(go,charBoard[i].GetComponent<RectTransform>() );
+            charCard[i]  = createCardBig(go, charBoard[i].GetComponent<RectTransform>());
+            charCard[i].GetComponent<RectTransform>().parent = charBoard[i].GetComponent<RectTransform>();
+            //charBoard[i] = createCardBig(go, charBoard[i].GetComponent<RectTransform>());
             //charBoard[i] = playerData.Static.teamDetails[teamNo, i];
         }
     }
@@ -32,7 +44,7 @@ public class teamManager : MonoBehaviour {
         go.GetComponent<CardData>().bigPic.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
         go.GetComponent<CardData>().bigPic.SetActive(true);
 
-        Destroy(Rect.gameObject);
+        //Destroy(Rect.gameObject);
 
         return go;
     }
@@ -45,10 +57,11 @@ public class teamManager : MonoBehaviour {
         gamemanager.Static.windDamage = 0;
 
         short i = 0;
-        foreach (var item in charBoard) {
+        foreach (var item in charCard) {
             gamemanager.Static.playerMaxHP += item.GetComponent<CardData>().HP;
             gamemanager.Static.playerRestoreHP += item.GetComponent<CardData>().restone;
             gamemanager.Static.allowAttackBeadType[i] = item.GetComponent<CardData>().Type;
+
 
             i++;
             switch (item.GetComponent<CardData>().Type) {
