@@ -49,7 +49,7 @@ public class beadScript : MonoBehaviour, IPointerClickHandler
     IEnumerator Example() {
         inSpawnCD = true;
         yield return new WaitForSeconds(gamemanager.Static.beadExistTime);
-        if (gamemanager.Static.isWin || gamemanager.Static.isLoss) {
+        if (!gamemanager.Static.isWin && !gamemanager.Static.isLoss) {
             boardManager.Static.delDataObject(boardIndex);
         }
         inSpawnCD = false;

@@ -104,7 +104,7 @@ public class boardManager : MonoBehaviour {
         go.GetComponent<beadScript>().boardIndex = boardData.index;
     }
 
-    List<Vector2> getTotalEmptyGridIndex() {
+    public List<Vector2> getTotalEmptyGridIndex(boardData[,] boardDataArray) {
         List<Vector2> totalEmptyGridIndex = new List<Vector2>();
         foreach (var item in boardDataArray) {
             if (item.haveBead == null) {
@@ -115,7 +115,7 @@ public class boardManager : MonoBehaviour {
     }
 
     void randomBoardBeadSpawn() {
-        List<Vector2> totalEmptyGridIndex = getTotalEmptyGridIndex();
+        List<Vector2> totalEmptyGridIndex = getTotalEmptyGridIndex(boardDataArray);
         if (totalEmptyGridIndex.Count <= 0) {
             return;
         }

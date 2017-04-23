@@ -18,4 +18,8 @@ public class CardData : MonoBehaviour
     public int skillType;
 
     public float Probability;
+
+    public GameObject bigPic;
+    public GameObject smallPic;
+
 }
