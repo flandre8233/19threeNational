@@ -15,8 +15,7 @@ public class CardData : MonoBehaviour
     public int ATK;
     public int restone;
 
-    public int skill
-        ;
+    public int skill;
 
     public float Probability;
 

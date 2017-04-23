@@ -23,7 +23,6 @@ public class gamemanager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        playerHP = playerMaxHP;
         isWin = false;
         isLoss = false;
         if (Static != null) {

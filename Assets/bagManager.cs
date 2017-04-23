@@ -25,9 +25,6 @@ public class bagManager : MonoBehaviour {
     public Vector2 boardStartPoint;
     public Vector2 boardSizeNumber;
 
-
-
-
     void setBoard(int boardWidthNumber, int boardHeightNumber) {
         bagDataArray = new boardData[boardWidthNumber, boardHeightNumber];
         for (int i = 0; i < (boardHeightNumber); i++) {
@@ -47,19 +44,20 @@ public class bagManager : MonoBehaviour {
     }
 
 
-
-    public List<GameObject> allCardData;
+    
     void serializeBag() {
         setBoard((int)boardSizeNumber.x, (int)boardSizeNumber.y);
         List<boardData> totalEmptyGridIndex = getTotalEmptyGridIndex(bagDataArray);
 
         foreach (var item in playerData.Static.playerCardData) {
-            createCard(allCardData[item.GetComponent<CardData>().Index], totalEmptyGridIndex[0]);
+            createCard(allCharData.Static.allCardData[item.GetComponent<CardData>().Index], totalEmptyGridIndex[0]);
             Debug.Log(totalEmptyGridIndex.Count + "/" + totalEmptyGridIndex[0].positionCenter);
             totalEmptyGridIndex.RemoveAt(0);
         }
 
     }
+
+
 
     void createCard(GameObject spawnObject, boardData boardData) {
         GameObject go = Instantiate(spawnObject, gameCanvas.transform);
@@ -80,9 +78,6 @@ public class bagManager : MonoBehaviour {
                 }
             }
         }
-        foreach (var item in boardDataArray) {
-            
-        }
         return totalEmptyGridIndex;
     }
 
@@ -98,7 +93,8 @@ public class bagManager : MonoBehaviour {
         boardSize = new Vector2(Screen.width, Screen.height * 0.5f);
         serializeBag();
 
-        
+
+
 
     }
 	
