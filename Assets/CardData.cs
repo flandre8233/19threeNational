@@ -11,13 +11,15 @@ public class CardData : MonoBehaviour
 
     public type Type;
 
-    public int HP;
-    public int ATK;
-    public int restone;
+    public string cardName { get; set; }
 
-    public int skill;
+    public int HP { get; set; }
+    public int ATK { get; set; }
+    public int restone { get; set; }
 
-    public float Probability;
+    public int skill { get; set; }
+
+    public float Probability { get; set; }
 
     public GameObject bigPic;
     public GameObject smallPic;
