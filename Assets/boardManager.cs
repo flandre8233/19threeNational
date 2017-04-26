@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class boardData
 {
@@ -14,7 +15,7 @@ public class boardData
 
 public class boardManager : MonoBehaviour {
     public static boardManager Static;
-
+    public CanvasScaler canvasScaler;
 
     public boardData[,] boardDataArray;
 
@@ -28,8 +29,6 @@ public class boardManager : MonoBehaviour {
     [Range(0.1f,10.0f)]
     public float spawnCDTime;
 
-    Vector2 defaultScale = new Vector2(800, 1280);
-
     private void Awake() {
         if (Static != null) {
             Destroy(this);
@@ -37,15 +36,14 @@ public class boardManager : MonoBehaviour {
         else {
             Static = this;
         }
-
         
 
         //screenSize = new Vector2(Screen.width, Screen.height);
-        screenSize = new Vector2(defaultScale.x, defaultScale.y);
+        screenSize = new Vector2(canvasScaler.referenceResolution.x, canvasScaler.referenceResolution.y);
         //boardSize = new Vector2(Screen.width,Screen.height*0.6f ); 4x4
         //boardSize = new Vector2(Screen.width, Screen.height * 0.5f); //6x5 5x4
 
-        boardSize = new Vector2(defaultScale.x, defaultScale.y * 0.5f); //6x5 5x4
+        boardSize = new Vector2(canvasScaler.referenceResolution.x, canvasScaler.referenceResolution.y * 0.5f); //6x5 5x4
 
         setBoard( (int)boardSizeNumber.x, (int)boardSizeNumber.y);
         //createTest();
@@ -80,7 +78,7 @@ public class boardManager : MonoBehaviour {
             for (int J = 0; J < (boardWidthNumber ) ; J++) {
                 //Debug.Log(i+"/"+J );
                 boardData item = new boardData();
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * defaultScale.x), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * defaultScale.y ));
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * canvasScaler.referenceResolution.x), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * canvasScaler.referenceResolution.y ));
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
