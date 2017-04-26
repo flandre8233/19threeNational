@@ -28,6 +28,7 @@ public class boardManager : MonoBehaviour {
     [Range(0.1f,10.0f)]
     public float spawnCDTime;
 
+    Vector2 defaultScale = new Vector2(800, 1280);
 
     private void Awake() {
         if (Static != null) {
@@ -37,8 +38,15 @@ public class boardManager : MonoBehaviour {
             Static = this;
         }
 
-        screenSize = new Vector2(Screen.width,Screen.height);
-        boardSize = new Vector2(Screen.width,Screen.height*0.5f );
+        
+
+        //screenSize = new Vector2(Screen.width, Screen.height);
+        screenSize = new Vector2(defaultScale.x, defaultScale.y);
+        //boardSize = new Vector2(Screen.width,Screen.height*0.6f ); 4x4
+        //boardSize = new Vector2(Screen.width, Screen.height * 0.5f); //6x5 5x4
+
+        boardSize = new Vector2(defaultScale.x, defaultScale.y * 0.5f); //6x5 5x4
+
         setBoard( (int)boardSizeNumber.x, (int)boardSizeNumber.y);
         //createTest();
     }
@@ -72,7 +80,7 @@ public class boardManager : MonoBehaviour {
             for (int J = 0; J < (boardWidthNumber ) ; J++) {
                 //Debug.Log(i+"/"+J );
                 boardData item = new boardData();
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * Screen.width), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * defaultScale.x), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * defaultScale.y ));
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
@@ -82,7 +90,10 @@ public class boardManager : MonoBehaviour {
 
             }
         }
-        beadSize = new Vector2((boardSize.x / boardWidthNumber), (boardSize.y / boardHeightNumber));
+        //beadSize = new Vector2((boardSize.x / boardWidthNumber), (boardSize.y / boardHeightNumber));
+        //beadSize = new Vector2((boardSize.x / boardWidthNumber), (boardSize.x / boardWidthNumber) );
+        beadSize = new Vector2((boardSize.y / boardHeightNumber) , (boardSize.y / boardHeightNumber));
+
         //Debug.Log(boardDataArray[0,0].position);
 
     }

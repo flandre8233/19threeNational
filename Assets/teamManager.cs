@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class teamManager : MonoBehaviour {
     public static teamManager Static;
@@ -41,6 +42,7 @@ public class teamManager : MonoBehaviour {
         go.GetComponent<RectTransform>().anchorMax = Rect.anchorMax;
         go.GetComponent<RectTransform>().anchoredPosition = Rect.anchoredPosition;
         go.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
+        go.GetComponent<CardData>().bigPic.GetComponent<Image>().raycastTarget = false;
         go.GetComponent<CardData>().bigPic.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
         go.GetComponent<CardData>().bigPic.SetActive(true);
 
