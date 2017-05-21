@@ -17,18 +17,26 @@ public class lottery : MonoBehaviour {
             Static = this;
         }
     }
-	
+    public  List<float> lotteryPro = new List<float>();
     public void startRandom() {
         //
         if (playerData.Static.magicStone < cost) {
             return;
         }
 
+
+        lotteryPro.Clear();
+        foreach (var item in lotteryTotal)
+        {
+            lotteryPro.Add(item.GetComponent<CardData>().Probability );
+        }
+
         playerData.Static.magicStone -= cost;
-         playerData.Static.playerCardData.Add( lotteryTotal[  itemAndEnemyProcessor.randomSetThingsType(lotteryTotal ) -1  ].GetComponent<CardData>() );
+         playerData.Static.playerCardData.Add( lotteryTotal[itemAndEnemyProcessor.RandomProbabilitySystem(lotteryPro) - 1  ].GetComponent<CardData>() );
         //Debug.Log(playerData.Static.playerCardData[playerData.Static.playerCardData.Count - 1].Type);
         Debug.Log(playerData.Static.playerCardData.Count );
     }
+
 
 	// Update is called once per frame
 	void Update () {

@@ -19,7 +19,7 @@ public class CardData : MonoBehaviour
 
     public int skill;
 
-    public float Probability { get; set; }
+    public float Probability;
 
     public GameObject bigPic;
     public GameObject smallPic;
