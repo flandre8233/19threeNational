@@ -20,13 +20,16 @@ public class bagManager : MonoBehaviour {
     public Canvas gameCanvas;
 
     Vector2 screenSize;
-    Vector2 boardSize;
+    Vector2 boardSize; //背包總大小 pixel
     Vector2 cardSmallPicSize;
     public Vector2 boardStartPoint;
-    public Vector2 boardSizeNumber;
+    public Vector2 boardSizeNumber; // 橫 直 有幾多粒
 
     void setBoard(int boardWidthNumber, int boardHeightNumber) {
         bagDataArray = new boardData[boardWidthNumber, boardHeightNumber];
+
+
+
         for (int i = 0; i < (boardHeightNumber); i++) {
             for (int J = 0; J < (boardWidthNumber); J++) {
                 Debug.Log(i + "/" + J);
@@ -40,7 +43,8 @@ public class bagManager : MonoBehaviour {
 
             }
         }
-        cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber), (boardSize.y / boardHeightNumber));
+        //cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber) - 20, (boardSize.y / boardHeightNumber) - 20 );
+        cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber) - 40, (boardSize.x / boardHeightNumber) - 40 );
     }
 
 
