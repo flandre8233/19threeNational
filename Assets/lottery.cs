@@ -10,6 +10,7 @@ public class lottery : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        lotteryTotal = serializeAllCard();
         if (Static != null) {
             Destroy(this);
         }
@@ -42,4 +43,29 @@ public class lottery : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    List<GameObject> serializeAllCard()
+    {
+        List<GameObject> list;
+        GameObject[] array;
+        //all = Resources.LoadAll("card",typeof(GameObject) );
+        array = Resources.LoadAll<GameObject>("card");
+        list = arrayToList(array);
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].GetComponent<CardData>().Index = i;
+        }
+        return list;
+    }
+
+    List<GameObject> arrayToList(GameObject[] arrayGo)
+    {
+        List<GameObject> returnList = new List<GameObject>();
+        foreach (var item in arrayGo)
+        {
+            returnList.Add(item);
+        }
+        return returnList;
+    }
+
 }

@@ -50,6 +50,7 @@ public class bagManager : MonoBehaviour {
 
     
     void serializeBag() {
+        //boardSizeNumber.y = Mathf.RoundToInt(playerData.Static.playerCardData.Count / boardSizeNumber.x)+1; //<----
         setBoard((int)boardSizeNumber.x, (int)boardSizeNumber.y);
         List<boardData> totalEmptyGridIndex = getTotalEmptyGridIndex(bagDataArray);
 
