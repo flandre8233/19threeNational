@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum type
 {
@@ -68,14 +69,16 @@ public class bagManager : MonoBehaviour {
 
 
     void createCard(GameObject spawnObject, boardData boardData) {
-        GameObject go = Instantiate(spawnObject, gameCanvas.transform);
+        GameObject go = Instantiate(spawnObject, bagCanvas.Static.canvasNormalBag.transform);
         boardData.haveBead = go;
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
         go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.SetActive(true);
-
+        go.GetComponent<CardData>().smallPic.GetComponent<Button>().onClick.AddListener(bagCanvas.Static.cardButton);
     }
+    
+
 
     public List<boardData> getTotalEmptyGridIndex(boardData[,] boardDataArray) {
         List<boardData> totalEmptyGridIndex = new List<boardData>();
