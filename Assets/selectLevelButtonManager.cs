@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class selectLevelButtonManager : MonoBehaviour {
 
-    void goLevel(int selectLevelIndex)
+    public void goLevel(int selectLevelIndex)
     {
 
     }
