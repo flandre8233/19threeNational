@@ -11,6 +11,7 @@ public class playerData : MonoBehaviour {
     public int coin;
     public int magicStone;
     public int moneyPayTotal;
+    public int enterLevel;
 
     void testCharSelection() {
         playerData.Static.teamDetails[0, 0] = playerData.Static.playerCardData[0];

@@ -9,6 +9,7 @@ public class gamemanager : MonoBehaviour {
     public type[] allowAttackBeadType;
     public int beadExistTime;
 
+
     public int playerHP;
     public int playerMaxHP;
     public int playerRestoreHP;
@@ -65,9 +66,21 @@ public class gamemanager : MonoBehaviour {
         enemy.GetComponent<npcScript>().HP -= damage;
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {
             Destroy(enemy);
-            isWin = true;
+            checkFloor();
         }
         
+    }
+
+    void checkFloor()
+    {
+        if (levelManager.Static.currentFloor < allLevelData.Static.allLevelDataList[levelManager.Static.currentLevelIndex].floorDetails.Count )
+        {
+            levelManager.Static.nextFloor();
+        }
+        else
+        {
+            isWin = true;
+        }
     }
 
     public void checkLife() {

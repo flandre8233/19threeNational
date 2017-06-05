@@ -18,14 +18,21 @@ public class teamManager : MonoBehaviour {
             Static = this;
         }
     }
-
     // Use this for initialization
     void Start () {
         getItemDetails(teamNo);
         getTeamTotalAbility();
+        SerializeLevelFloor();
     }
 
-    
+    void SerializeLevelFloor()
+    {
+        levelManager.Static.currentLevelIndex = playerData.Static.enterLevel;
+        levelManager.Static.currentFloor = 0;
+        levelManager.Static.enterFloor();
+    }
+
+
     void getItemDetails(short teamNo ) {
         for (int i = 0; i < charBoard.Length; i++) {
             GameObject go = allCharData.Static.allCardData[playerData.Static.teamDetails[teamNo, i].GetComponent<CardData>().Index];
@@ -42,9 +49,9 @@ public class teamManager : MonoBehaviour {
         go.GetComponent<RectTransform>().anchorMax = Rect.anchorMax;
         go.GetComponent<RectTransform>().anchoredPosition = Rect.anchoredPosition;
         go.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
-        go.GetComponent<CardData>().bigPic.GetComponent<Image>().raycastTarget = false;
-        go.GetComponent<CardData>().bigPic.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
-        go.GetComponent<CardData>().bigPic.SetActive(true);
+        go.GetComponent<CardData>().smallPic.GetComponent<Image>().raycastTarget = false;
+        go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
+        go.GetComponent<CardData>().smallPic.SetActive(true);
 
         //Destroy(Rect.gameObject);
 

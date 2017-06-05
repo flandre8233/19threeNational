@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class npcScript : MonoBehaviour {
+    public int ID;
     public int HP;
     public int MaxHP;
     public float attackCD;

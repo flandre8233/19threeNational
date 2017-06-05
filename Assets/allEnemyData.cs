@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class allCharData : MonoBehaviour {
-    public static allCharData Static;
-    public List<GameObject> allCardData;
-
-    public object[] all;
-
+public class allEnemyData : MonoBehaviour {
+    public static allEnemyData Static;
+    public List<GameObject> allEnemyDatas;
 
     private void Awake()
     {
@@ -19,19 +16,19 @@ public class allCharData : MonoBehaviour {
         {
             Static = this;
         }
-        allCardData = serializeAllCard();
+        allEnemyDatas = serializeAllEnemyDatas();
     }
 
-    List<GameObject> serializeAllCard()
+    List<GameObject> serializeAllEnemyDatas()
     {
         List<GameObject> list;
         GameObject[] array;
         //all = Resources.LoadAll("card",typeof(GameObject) );
-        array = Resources.LoadAll<GameObject>("card");
+        array = Resources.LoadAll<GameObject>("enemy");
         list = arrayToList(array);
-        for (int i = 0;  i < list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
-            list[i].GetComponent<CardData>().Index = i;
+            list[i].GetComponent<npcScript>().ID = i;
         }
         return list;
     }
@@ -45,4 +42,5 @@ public class allCharData : MonoBehaviour {
         }
         return returnList;
     }
+
 }

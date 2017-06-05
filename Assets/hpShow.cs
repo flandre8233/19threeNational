@@ -13,7 +13,9 @@ public class hpShow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         playerHPtext.text = gamemanager.Static.playerMaxHP + " / " + gamemanager.Static.playerHP;
+        if (gamemanager.Static.findEnemy() != null)
+        {
         enemyHPtext.text = gamemanager.Static.findEnemy().GetComponent<npcScript>().HP + " / " + gamemanager.Static.findEnemy().GetComponent<npcScript>().MaxHP;
-
+        }
     }
 }
