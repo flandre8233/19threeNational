@@ -14,13 +14,13 @@ public enum type
 
 }
 
-public class bagManager : MonoBehaviour {
+public class bagManager : MonoBehaviour
+{
     public static bagManager Static;
     public boardData[,] bagDataArray;
 
     public Canvas gameCanvas;
 
-    Vector2 screenSize;
     Vector2 boardSize; //背包總大小 pixel
     Vector2 cardSmallPicSize;
     public Vector2 boardStartPoint;
@@ -66,16 +66,16 @@ public class bagManager : MonoBehaviour {
 
     }
 
-
+    public GameObject bagContent;
 
     void createCard(GameObject spawnObject, boardData boardData) {
-        GameObject go = Instantiate(spawnObject, bagCanvas.Static.canvasNormalBag.transform);
+        GameObject go = Instantiate(spawnObject, bagContent.transform);
         boardData.haveBead = go;
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
         go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.SetActive(true);
-        go.GetComponent<CardData>().smallPic.GetComponent<Button>().onClick.AddListener(bagCanvas.Static.cardButton);
+        go.GetComponent<CardData>().smallPic.GetComponent<Button>().onClick.AddListener(bagCanvas.Static.cardButton); //加入 onclick listener
     }
     
 
@@ -100,9 +100,8 @@ public class bagManager : MonoBehaviour {
         else {
             Static = this;
         }
-        screenSize = new Vector2(Screen.width, Screen.height);
         //boardSize = new Vector2(Screen.width, Screen.height * 0.5f);
-        boardSize = new Vector2(Screen.width, 4000 );
+        boardSize = new Vector2(Screen.width, 0 );
         serializeBag();
 
 
