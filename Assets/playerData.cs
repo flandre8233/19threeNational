@@ -13,15 +13,20 @@ public class playerData : MonoBehaviour {
     public int moneyPayTotal;
     public int enterLevel;
 
-    void testCharSelection() {
-        playerData.Static.teamDetails[0, 0] = playerData.Static.playerCardData[0];
-        playerData.Static.teamDetails[0, 1] = playerData.Static.playerCardData[1];
-        playerData.Static.teamDetails[0, 2] = playerData.Static.playerCardData[2];
+    void testCharSelection()
+    {
+        Debug.Log(playerCardData.Count);
+        teamDetails[0, 0] = playerCardData[0];
+        teamDetails[0, 1] = playerCardData[1];
+        teamDetails[0, 2] = playerCardData[2];
+        Debug.Log(
+        teamDetails.GetLength(1));
     }
 
     private void Awake() {
         if (Static != null) {
             Destroy(gameObject);
+            return;
         }
         else {
             Static = this;

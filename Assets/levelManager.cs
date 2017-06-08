@@ -26,6 +26,8 @@ public class levelManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //enterFloor();
+
+        SerializeLevelFloor();
     }
 	
 	// Update is called once per frame
@@ -35,6 +37,14 @@ public class levelManager : MonoBehaviour {
             nextFloor();
         }
 	}
+
+    void SerializeLevelFloor()
+    {
+        currentLevelIndex = playerData.Static.enterLevel;
+        currentFloor = 0;
+        enterFloor();
+    }
+
 
     public void enterFloor()
     {

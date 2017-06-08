@@ -22,15 +22,8 @@ public class teamManager : MonoBehaviour {
     void Start () {
         getItemDetails(teamNo);
         getTeamTotalAbility();
-        SerializeLevelFloor();
     }
 
-    void SerializeLevelFloor()
-    {
-        levelManager.Static.currentLevelIndex = playerData.Static.enterLevel;
-        levelManager.Static.currentFloor = 0;
-        levelManager.Static.enterFloor();
-    }
 
 
     void getItemDetails(short teamNo ) {

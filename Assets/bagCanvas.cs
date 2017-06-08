@@ -9,9 +9,10 @@ public class bagCanvas : MonoBehaviour////(1)
 {
     public static bagCanvas Static;
 
-
+    public GameObject bagContect;
     public GameObject canvasNormalBag;
     public GameObject cardDetailsObject;
+    public GameObject teamSetObject;
 
     public Text HPText;
     public Text attackText;
@@ -25,6 +26,7 @@ public class bagCanvas : MonoBehaviour////(1)
     public GameObject bigImageObject;
 
     bool openCardDetails = false;
+    bool openTeamSet = false;
 
     private void Awake()
     {
@@ -41,17 +43,48 @@ public class bagCanvas : MonoBehaviour////(1)
 
     public void cardButton()
     {
-        openCardDetails = !openCardDetails;
-        canvasNormalBag.SetActive(!openCardDetails);
-        cardDetailsObject.SetActive(openCardDetails);
+        if (openTeamSet)
+        {
+            int index = bagTeamSettingManager.Static.selectedIndex;
+            bagDisplayData displayCardData = ButtonEventData.selectedObject.GetComponent<bagDisplayData>();
+            playerData.Static.teamDetails[0, index] = playerData.Static.playerCardData[ displayCardData.inPlayerCardDataListIndex];
+
+            Debug.Log("diu");
+            bagTeamSettingManager.Static.updataTeamData();
+        }
+        else
+        {
+            openCardDetails = !openCardDetails;
+            canvasNormalBag.SetActive(!openCardDetails);
+            bagContect.SetActive(!openCardDetails);
+            cardDetailsObject.SetActive(openCardDetails);
 
 
+            if (cardDetailsObject.activeSelf)
+            {
+                displayCardDetail();
+            }
+
+        }
+
+    }
+
+    public void openTeamSetButton()
+    {
+        openTeamSet = !openTeamSet;
+        canvasNormalBag.SetActive(!openTeamSet);
+        bagContect.SetActive(!openTeamSet);
+        teamSetObject.SetActive(openTeamSet);
+
+        /*
         if (cardDetailsObject.activeSelf)
         {
             displayCardDetail();
         }
+        */
 
     }
+
     PointerEventData ButtonEventData;
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -64,10 +97,10 @@ public class bagCanvas : MonoBehaviour////(1)
     {
         Debug.Log(ButtonEventData.selectedObject);
         //Debug.Log(ButtonEventData.selectedObject.GetComponentInParent<Transform>().name );
-        CardData displayCardData = ButtonEventData.selectedObject.transform.parent.GetComponent<CardData>();
+        bagDisplayData displayCardData = ButtonEventData.selectedObject.GetComponent<bagDisplayData>();
         // CardData displayCardData = ButtonEventData.selectedObject.GetComponentInParent<CardData>();
 
-        bigImage.sprite = displayCardData.bigPic.GetComponent<Image>().sprite;
+        bigImage.sprite = allCharData.Static.allCardData[displayCardData.Index].GetComponent<CardData>().bigPic.GetComponent<Image>().sprite;
         bigImage.SetNativeSize();
 
         nameText.text = displayCardData.cardName;

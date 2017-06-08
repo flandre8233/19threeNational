@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
-public class CardData : MonoBehaviour
+public class bagDisplayData : MonoBehaviour
 {
     public int Index;
 
-    [Range(1,99)]
+    public int inPlayerCardDataListIndex;
+    public bool beSelected;
+
     public short level;
 
     public type Type;
@@ -21,9 +21,5 @@ public class CardData : MonoBehaviour
     public int skill;
 
     public float Probability;
-
-    
-    public GameObject bigPic;
-    public GameObject smallPic;
 
 }
