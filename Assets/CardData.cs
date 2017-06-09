@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 [System.Serializable]
 public class CardData : MonoBehaviour
 {
@@ -25,5 +26,7 @@ public class CardData : MonoBehaviour
     
     public GameObject bigPic;
     public GameObject smallPic;
+
+    public EventTrigger cardSkill;
 
 }
