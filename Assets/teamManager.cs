@@ -21,7 +21,9 @@ public class teamManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         getItemDetails(teamNo);
+        skill.Static.controllSkillCD();
         getTeamTotalAbility();
+
     }
 
 

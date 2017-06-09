@@ -14,7 +14,7 @@ public class AllSkillData : MonoBehaviour {
         skill.Static.beadSpawnSpeedUp(0.2f,5);
     }
 
-    public void destroySpecificBead()
+    public void destroyHurtBead()
     {
         destroySpecificBead(type.hurt);
     }

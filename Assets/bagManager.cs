@@ -99,7 +99,7 @@ public class bagManager : MonoBehaviour
         deepCopyTarget.HP = objectCardData.HP;
         deepCopyTarget.ATK = objectCardData.ATK;
         deepCopyTarget.restone = objectCardData.restone;
-        deepCopyTarget.skill = objectCardData.skill;
+        deepCopyTarget.skill = objectCardData.skillCD;
         deepCopyTarget.Probability = objectCardData.Probability;
     }
 

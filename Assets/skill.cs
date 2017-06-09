@@ -17,13 +17,60 @@ public class skill : MonoBehaviour
         {
             Static = this;
         }
+
+    }
+
+    public int[] curCD;
+
+    public void controllSkillCD()
+    {
+        for (int i = 0; i < teamManager.Static.charCard.Length; i++)
+        {
+            CardData item = teamManager.Static.charCard[i].GetComponent<CardData>();
+            if (checkCD(i) )
+            {
+                item.smallPic.GetComponent<Image>().color = new Color(1,1,1,1);
+            }
+            else
+            {
+                item.smallPic.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f, 1);
+            }
+        }
+
+    }
+
+    public void CDBoost()
+    {
+        for (int i = 0; i < curCD.Length; i++)
+        {
+            curCD[i]++;
+        }
+
+    }
+
+    bool checkCD(int No)
+    {
+        CardData item = teamManager.Static.charCard[No].GetComponent<CardData>();
+        Debug.Log(item.skillCD);
+        bool result = false;
+        if (item.skillCD > curCD[No] )
+        {
+            result = false;
+        }
+        else
+        {
+            result = true;
+        }
+        return result;
     }
 
     public void skill1(int buttonNo)
     {
-        if (teamManager.Static.charCard[buttonNo].GetComponent<CardData>().cardSkill != null)
+        if (teamManager.Static.charCard[buttonNo].GetComponent<CardData>().cardSkill != null && checkCD(buttonNo) )
         {
             teamManager.Static.charCard[buttonNo].GetComponent<CardData>().cardSkill.Invoke();
+            curCD[buttonNo] = 0;
+            controllSkillCD();
         }
 
     }

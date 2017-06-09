@@ -25,6 +25,8 @@ public class beadScript : MonoBehaviour, IPointerClickHandler
         if (checkIsAllowAttack()) {
             gamemanager.Static.combo++;
             gamemanager.Static.attackEnemy( attackTypeDamage() );
+            skill.Static.CDBoost();
+            skill.Static.controllSkillCD();
             //傷害
         }
         else {
