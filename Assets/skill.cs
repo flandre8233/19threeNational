@@ -3,116 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class skill : MonoBehaviour {
-    //public Button[] buttonArray;
+public class skill : MonoBehaviour
+{
+    public static skill Static;
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    public void skill1(int buttonNo) {
-        changeAllBead(teamManager.Static.charCard[buttonNo].GetComponent<CardData>().Type );
-        switch (teamManager.Static.charCard[buttonNo].GetComponent<CardData>().Type) {
-            case type.fire:
-                break;
-            case type.water:
-                break;
-            case type.wind:
-                break;
-            case type.restone:
-                break;
-            case type.hurt:
-                break;
-            default:
-                break;
-        }
-
-    }
-
-    public void skill2(int buttonNo)
+    private void Awake()
     {
-        changeSpecificBead(teamManager.Static.charCard[buttonNo].GetComponent<CardData>().Type, type.fire);
-    }
-
-    void changeSpecificBead(type Type, type toType)
-    {
-        GameObject[] goArray = GameObject.FindGameObjectsWithTag("bead");
-        Debug.Log(goArray.Length);
-        for (int i = 0; i < goArray.Length; i++)
+        if (Static != null)
         {
-            if (goArray[i].GetComponent<beadScript>().type == Type )
-            {
-                switch (toType)
-                {
-                    case type.fire:
-                        boardManager.Static.createBead(boardManager.Static.canSpawnType[0], goArray[i].GetComponent<beadScript>().boardIndex);
-                        Destroy(goArray[i]);
-                        break;
-                    case type.water:
-                        boardManager.Static.createBead(boardManager.Static.canSpawnType[1], goArray[i].GetComponent<beadScript>().boardIndex);
-                        Destroy(goArray[i]);
-                        break;
-                    case type.wind:
-                        boardManager.Static.createBead(boardManager.Static.canSpawnType[2], goArray[i].GetComponent<beadScript>().boardIndex);
-                        Destroy(goArray[i]);
-                        break;
-                    case type.restone:
-                        boardManager.Static.createBead(boardManager.Static.canSpawnType[3], goArray[i].GetComponent<beadScript>().boardIndex);
-                        Destroy(goArray[i]);
-                        break;
-                    case type.hurt:
-                        boardManager.Static.createBead(boardManager.Static.canSpawnType[4], goArray[i].GetComponent<beadScript>().boardIndex);
-                        Destroy(goArray[i]);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            Destroy(this);
+        }
+        else
+        {
+            Static = this;
+        }
+    }
 
-
+    public void skill1(int buttonNo)
+    {
+        if (teamManager.Static.charCard[buttonNo].GetComponent<CardData>().cardSkill != null)
+        {
+            teamManager.Static.charCard[buttonNo].GetComponent<CardData>().cardSkill.Invoke();
         }
 
     }
 
-    void changeAllBead(type Type) {
-        GameObject[] goArray = GameObject.FindGameObjectsWithTag("bead");
-        Debug.Log(goArray.Length);
-        for (int i = 0; i < goArray.Length; i++) {
 
-        
-            switch (Type) {
-                case type.fire:
-                    boardManager.Static.createBead(boardManager.Static.canSpawnType[0],goArray[i].GetComponent<beadScript>().boardIndex );
-                    Destroy(goArray[i] );
-                    break;
-                case type.water:
-                    boardManager.Static.createBead(boardManager.Static.canSpawnType[1], goArray[i].GetComponent<beadScript>().boardIndex);
-                    Destroy(goArray[i]);
-                    break;
-                case type.wind:
-                    boardManager.Static.createBead(boardManager.Static.canSpawnType[2], goArray[i].GetComponent<beadScript>().boardIndex);
-                    Destroy(goArray[i]);
-                    break;
-                case type.restone:
-                    boardManager.Static.createBead(boardManager.Static.canSpawnType[3], goArray[i].GetComponent<beadScript>().boardIndex);
-                    Destroy(goArray[i]);
-                    break;
-                case type.hurt:
-                    boardManager.Static.createBead(boardManager.Static.canSpawnType[4], goArray[i].GetComponent<beadScript>().boardIndex);
-                    Destroy(goArray[i]);
-                    break;
-                default:
-                    break;
-            }
-        }
-            
+    float orlSpawnCDTime;
+    float ExistTime;
+    public void beadSpawnSpeedUp(float time, float existTime)
+    {
+        ExistTime = existTime;
+        orlSpawnCDTime = boardManager.Static.spawnCDTime;
+        boardManager.Static.spawnCDTime = time;
+        StartCoroutine(speedUp());
+    }
+
+    IEnumerator speedUp()
+    {
+        Debug.Log("diudiu");
+        yield return new WaitForSeconds(ExistTime);
+        boardManager.Static.spawnCDTime = orlSpawnCDTime;
     }
 
 }
