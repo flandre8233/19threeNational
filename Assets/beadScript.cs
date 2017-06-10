@@ -24,7 +24,7 @@ public class beadScript : MonoBehaviour, IPointerClickHandler
     public virtual void attackComboFunction() {
         if (checkIsAllowAttack()) {
             gamemanager.Static.combo++;
-            gamemanager.Static.attackEnemy( attackTypeDamage() );
+            gamemanager.Static.attackEnemy( attackTypeDamage(),type );
             skill.Static.CDBoost();
             skill.Static.controllSkillCD();
             //傷害

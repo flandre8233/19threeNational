@@ -73,7 +73,7 @@ public class bagCanvas : MonoBehaviour////(1)
     {
         openTeamSet = !openTeamSet;
         canvasNormalBag.SetActive(!openTeamSet);
-        bagContect.SetActive(openTeamSet);
+        bagContect.SetActive(true);
         teamSetObject.SetActive(openTeamSet);
 
         /*
