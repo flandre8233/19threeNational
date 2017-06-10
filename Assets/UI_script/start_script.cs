@@ -8,8 +8,16 @@ public class start_script : MonoBehaviour {
     public RectTransform scene_second;
 
     float timer = 0;
+
+    public GameObject startCanvas;
     // Use this for initialization
     void Start () {
+        if (gameStatus.Static.alreadyOpenTitle)
+        {
+            startCanvas.SetActive(false);
+            return;
+        }
+
         if(playerData.Static.first_scene_lock == true)
         {
             scene_first.gameObject.SetActive(true);
@@ -33,6 +41,7 @@ public class start_script : MonoBehaviour {
     }
     public void start_game()
     {
+        gameStatus.Static.alreadyOpenTitle = true;
         scene_second.gameObject.SetActive(true);
         playerData.Static.lock_start = true;
     }
