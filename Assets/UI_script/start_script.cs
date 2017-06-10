@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class start_script : MonoBehaviour {
-
+    public static start_script Static;
     public RectTransform scene_first;
     public RectTransform scene_second;
-    public bool lock_start = false;
+
     float timer = 0;
     // Use this for initialization
     void Start () {
-        scene_first.gameObject.SetActive(true);
+        if(playerData.Static.first_scene_lock == true)
+        {
+            scene_first.gameObject.SetActive(true);
+            playerData.Static.first_scene_lock = false;
+        }
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (lock_start == true)
+        if (playerData.Static.lock_start == true)
         {
             timer += Time.deltaTime;
             //Debug.Log(timer);
@@ -29,6 +34,6 @@ public class start_script : MonoBehaviour {
     public void start_game()
     {
         scene_second.gameObject.SetActive(true);
-        lock_start = true;
+        playerData.Static.lock_start = true;
     }
 }

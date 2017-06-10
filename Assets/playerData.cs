@@ -13,6 +13,9 @@ public class playerData : MonoBehaviour {
     public int moneyPayTotal;
     public int enterLevel;
 
+    public bool lock_start = false;
+    public bool first_scene_lock = true;
+
     void testCharSelection()
     {
         Debug.Log(playerCardData.Count);
