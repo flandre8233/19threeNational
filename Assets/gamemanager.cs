@@ -57,13 +57,13 @@ public class gamemanager : MonoBehaviour {
         return GameObject.FindGameObjectWithTag("enemy");
     }
 
-    public void attackEnemy(int damage) {
+    public void attackEnemy(int damage,type Type) {
         if (findEnemy() == null) {
             return;
         }
         GameObject enemy = findEnemy();
 
-        enemy.GetComponent<npcScript>().HP -= damageIncludeCombo(damage);
+        enemy.GetComponent<npcScript>().HP -= (int) ( damageIncludeCombo(damage) * checkTypeInhibition(enemy.GetComponent<npcScript>().type ,Type) );
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {
             Destroy(enemy);
             checkFloor();
@@ -75,10 +75,52 @@ public class gamemanager : MonoBehaviour {
     {
         int number = 0;
         float comboIncrease = 1.2f;
-        number = (int) (damage * (combo * comboIncrease) );
+        number = (int) (damage * (combo + comboIncrease) );
 
         return number;
     }
+
+    float checkTypeInhibition(type enemyType, type Type)
+    {
+        switch (Type)
+        {
+            case type.fire:
+                switch (enemyType)
+                {
+                    case type.fire:
+                        return 1;
+                    case type.water:
+                        return 0.5f;
+                    case type.wind:
+                        return 2;
+                }
+                break;
+            case type.water:
+                switch (enemyType)
+                {
+                    case type.fire:
+                        return 2;
+                    case type.water:
+                        return 1;
+                    case type.wind:
+                        return 0.5f;
+                }
+                break;
+            case type.wind:
+                switch (enemyType)
+                {
+                    case type.fire:
+                        return 0.5f;
+                    case type.water:
+                        return 2;
+                    case type.wind:
+                        return 1;
+                }
+                break;
+        }
+        return 1;
+    }
+
 
     void checkFloor()
     {

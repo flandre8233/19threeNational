@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class npcScript : MonoBehaviour {
     public int ID;
+    public type type;
     public int HP;
     public int MaxHP;
     public float attackCD;

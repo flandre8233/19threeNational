@@ -13,6 +13,4 @@ public class canvasScalerSetting : MonoBehaviour {
 
         canvasScaler.matchWidthOrHeight = screenWidthScale > screenHeightScale ? 1 : 0;
     }
-
-
 }
