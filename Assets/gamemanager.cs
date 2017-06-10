@@ -42,7 +42,11 @@ public class gamemanager : MonoBehaviour {
 
     }
 
+    public shrinkManager enemyShrink;
+    public shrinkManager playerShrink;
+
     public void enemyAttackPlayerScript( int damage) {
+        playerShrink.startShrink();
         playerHP -= damage;
         if (deadAliveCheck(playerHP) ) {
             isLoss = true;
@@ -63,6 +67,7 @@ public class gamemanager : MonoBehaviour {
         }
         GameObject enemy = findEnemy();
 
+        enemyShrink.startShrink();
         enemy.GetComponent<npcScript>().HP -= (int) ( damageIncludeCombo(damage) * checkTypeInhibition(enemy.GetComponent<npcScript>().type ,Type) );
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {
             Destroy(enemy);
