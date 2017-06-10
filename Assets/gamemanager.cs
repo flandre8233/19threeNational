@@ -63,12 +63,21 @@ public class gamemanager : MonoBehaviour {
         }
         GameObject enemy = findEnemy();
 
-        enemy.GetComponent<npcScript>().HP -= damage;
+        enemy.GetComponent<npcScript>().HP -= damageIncludeCombo(damage);
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {
             Destroy(enemy);
             checkFloor();
         }
         
+    }
+
+    int damageIncludeCombo(int damage)
+    {
+        int number = 0;
+        float comboIncrease = 1.2f;
+        number = (int) (damage * (combo * comboIncrease) );
+
+        return number;
     }
 
     void checkFloor()

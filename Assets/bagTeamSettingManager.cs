@@ -55,7 +55,6 @@ public class bagTeamSettingManager : MonoBehaviour
    public  void selectTeamMember(int memberIndex)
     {
         selectedIndex = memberIndex;
-        bagCanvas.Static.bagContect.SetActive(true);
 
         //teamSet.GetComponent<teamSetPage>().teamDetails[0].UnitImage[memberIndex].sprite = playerData.Static.playerCardData[memberIndex].smallPic.GetComponent<Image>().sprite;
         //playerData.Static.teamDetails[0, memberIndex] = playerData.Static.playerCardData[memberIndex];
