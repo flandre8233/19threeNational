@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class lottery : MonoBehaviour {
     public static lottery Static;
     public List<GameObject> lotteryTotal;
+
 
     public short cost;
 
@@ -41,7 +43,6 @@ public class lottery : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     List<GameObject> serializeAllCard()
