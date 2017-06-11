@@ -21,6 +21,8 @@ public class bagManager : MonoBehaviour
 
     public Canvas gameCanvas;
 
+
+
     Vector2 boardSize; //背包總大小 pixel
     Vector2 cardSmallPicSize;
     public Vector2 boardStartPoint;
@@ -78,6 +80,7 @@ public class bagManager : MonoBehaviour
         bagDisplayData displayData = go.GetComponent<bagDisplayData>();
         //GameObject go = Instantiate(spawnObject, bagContent.transform);
         boardData.haveBead = go;
+        displayData.inBagIndex = boardData.index;
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
         go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         /*

@@ -19,9 +19,11 @@ public class propertyData : MonoBehaviour
         propertyDataList = Resources.LoadAll<Sprite>("property");
     }
 
+    public GameObject emptyObject;
+
     public void addProperty(GameObject parentImage, type type)
     {
-        GameObject go = Instantiate(new GameObject(), parentImage.transform);
+        GameObject go = Instantiate(emptyObject,parentImage.transform);
         Image objectImage = go.AddComponent<Image>();
         switch (type)
         {

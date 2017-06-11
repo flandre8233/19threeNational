@@ -40,24 +40,27 @@ public class bagTeamSettingManager : MonoBehaviour
                     continue;
                 }
                 teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitImage[j].sprite = playerData.Static.teamDetails[i,j].smallPic.GetComponent<Image>().sprite;
+                switch (playerData.Static.teamDetails[i, j].Type)
+                {
+                    case type.fire:
+                        teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitPropertyImage[j].sprite = propertyData.Static.propertyDataList[0];
+                        break;
+                    case type.water:
+                        teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitPropertyImage[j].sprite = propertyData.Static.propertyDataList[1];
+                        break;
+                    case type.wind:
+                        teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitPropertyImage[j].sprite = propertyData.Static.propertyDataList[2];
+                        break;
+                }
+                teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitPropertyImage[j].gameObject.GetComponent<RectTransform>().sizeDelta = teamSet.GetComponent<teamSetPage>().teamDetails[i].UnitImage[j].gameObject.GetComponent<RectTransform>().sizeDelta;
             }
         }
         
- 
-
-        //teamSet.GetComponent<teamSetPage>().teamDetails[0].UnitImage[0].sprite = playerData.Static.teamDetails[0, 0].smallPic.GetComponent<Image>().sprite;
-        //teamSet.GetComponent<teamSetPage>().teamDetails[0].UnitImage[1].sprite = playerData.Static.teamDetails[0, 1].smallPic.GetComponent<Image>().sprite;
-        //teamSet.GetComponent<teamSetPage>().teamDetails[0].UnitImage[2].sprite = playerData.Static.teamDetails[0, 2].smallPic.GetComponent<Image>().sprite;
-        //playerData.Static.teamDetails[0.1];
-
     }
     public int selectedIndex;
    public  void selectTeamMember(int memberIndex)
     {
         selectedIndex = memberIndex;
-
-        //teamSet.GetComponent<teamSetPage>().teamDetails[0].UnitImage[memberIndex].sprite = playerData.Static.playerCardData[memberIndex].smallPic.GetComponent<Image>().sprite;
-        //playerData.Static.teamDetails[0, memberIndex] = playerData.Static.playerCardData[memberIndex];
     }
 
 

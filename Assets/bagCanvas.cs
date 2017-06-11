@@ -28,6 +28,8 @@ public class bagCanvas : MonoBehaviour////(1)
     bool openCardDetails = false;
     bool openTeamSet = false;
 
+    public List<Vector2> alreadySelectedIndexArray;
+
     private void Awake()
     {
         if (Static != null)
@@ -40,6 +42,46 @@ public class bagCanvas : MonoBehaviour////(1)
         }
     }
 
+    bool checkAlreadySelected(Vector2 v2)
+    {
+        foreach (var item in alreadySelectedIndexArray)
+        {
+            if (item == v2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void setColorInTeamCanvas()
+    {
+        resetColor();
+
+        foreach (var item in bagManager.Static.bagDataArray)
+        {
+            foreach (var items in alreadySelectedIndexArray)
+            {
+                if (item.index == items)
+                {
+                    item.haveBead.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f,1);
+                }
+
+            }
+        }
+
+    }
+
+    void resetColor()
+    {
+        foreach (var item in bagManager.Static.bagDataArray)
+        {
+            if (item.haveBead != null)
+            {
+                item.haveBead.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            }
+        }
+    }
 
     public void cardButton()
     {
@@ -47,10 +89,13 @@ public class bagCanvas : MonoBehaviour////(1)
         {
             int index = bagTeamSettingManager.Static.selectedIndex;
             bagDisplayData displayCardData = ButtonEventData.selectedObject.GetComponent<bagDisplayData>();
-            playerData.Static.teamDetails[0, index] = playerData.Static.playerCardData[ displayCardData.inPlayerCardDataListIndex];
-
-            Debug.Log("diu");
+            if (!checkAlreadySelected(displayCardData.inBagIndex) )
+            {
+                playerData.Static.teamDetails[0, index] = playerData.Static.playerCardData[displayCardData.inPlayerCardDataListIndex];
+                alreadySelectedIndexArray[index] = displayCardData.inBagIndex;
+            }
             bagTeamSettingManager.Static.updataTeamData();
+            setColorInTeamCanvas();
         }
         else
         {
@@ -75,13 +120,14 @@ public class bagCanvas : MonoBehaviour////(1)
         canvasNormalBag.SetActive(!openTeamSet);
         bagContect.SetActive(true);
         teamSetObject.SetActive(openTeamSet);
-
-        /*
-        if (cardDetailsObject.activeSelf)
+        if (openTeamSet)
         {
-            displayCardDetail();
+            setColorInTeamCanvas();
         }
-        */
+        else
+        {
+            resetColor();
+        }
 
     }
 

@@ -6,7 +6,7 @@ public class bagDisplayData : MonoBehaviour
     public int Index;
 
     public int inPlayerCardDataListIndex;
-    public bool beSelected;
+    public Vector2 inBagIndex;
 
     public short level;
 
