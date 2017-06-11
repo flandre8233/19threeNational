@@ -22,6 +22,17 @@ public class gamemanager : MonoBehaviour {
     public bool isWin = false;
     public bool isLoss = false;
 
+    public GameObject damageDisplayObject;
+
+    public GameObject parent;
+
+    public void spawnNumberDisplay(Vector3 where, int number, int type)
+    {
+        //GameObject go = Instantiate(damageDisplayObject, where, Quaternion.identity);
+        GameObject go = Instantiate(damageDisplayObject, parent.transform );
+        go.GetComponent<damageDisplay>().spawnDamageDisplay(number, type);
+    }
+
     // Use this for initialization
     void Start() {
         isWin = false;
@@ -39,7 +50,10 @@ public class gamemanager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        if (Input.GetKeyUp(KeyCode.L) )
+        {
+            spawnNumberDisplay(new Vector3(),495,0);
+        }
     }
 
     public shrinkManager enemyShrink;
@@ -68,7 +82,20 @@ public class gamemanager : MonoBehaviour {
         GameObject enemy = findEnemy();
 
         enemyShrink.startShrink();
-        enemy.GetComponent<npcScript>().HP -= (int) ( damageIncludeCombo(damage) * checkTypeInhibition(enemy.GetComponent<npcScript>().type ,Type) );
+        int realDamage = (int)(damageIncludeCombo(damage) * checkTypeInhibition(enemy.GetComponent<npcScript>().type, Type));
+        enemy.GetComponent<npcScript>().HP -= realDamage;
+        switch (Type)
+        {
+            case type.fire:
+                spawnNumberDisplay(new Vector3(), realDamage, 4);
+                break;
+            case type.water:
+                spawnNumberDisplay(new Vector3(), realDamage, 2);
+                break;
+            case type.wind:
+                spawnNumberDisplay(new Vector3(), realDamage, 3);
+                break;
+        }
         if (deadAliveCheck(enemy.GetComponent<npcScript>().HP) ) {
             Destroy(enemy);
             checkFloor();
