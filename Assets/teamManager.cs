@@ -47,6 +47,7 @@ public class teamManager : MonoBehaviour {
         go.GetComponent<CardData>().smallPic.GetComponent<Image>().raycastTarget = false;
         go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = Rect.sizeDelta;
         go.GetComponent<CardData>().smallPic.SetActive(true);
+        propertyData.Static.addProperty(go, go.GetComponent<CardData>().Type);
 
         //Destroy(Rect.gameObject);
 

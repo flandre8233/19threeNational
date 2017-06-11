@@ -74,6 +74,7 @@ public class bagManager : MonoBehaviour
 
     void createCard( boardData boardData,Sprite image,CardData objectCardData,int inBagIndex) {
         GameObject go = Instantiate(displayObject, bagContent.transform);
+        propertyData.Static.addProperty(go, objectCardData.Type);
         bagDisplayData displayData = go.GetComponent<bagDisplayData>();
         //GameObject go = Instantiate(spawnObject, bagContent.transform);
         boardData.haveBead = go;
@@ -88,6 +89,8 @@ public class bagManager : MonoBehaviour
         go.GetComponent<Image>().sprite = image;
         deepCopy(inBagIndex,ref displayData, objectCardData);
     }
+
+
 
     void deepCopy(int inBagIndex, ref bagDisplayData deepCopyTarget, CardData objectCardData)
     {
@@ -115,19 +118,23 @@ public class bagManager : MonoBehaviour
         return totalEmptyGridIndex;
     }
 
-    // Use this for initialization
-    void Start () {
-        if (Static != null) {
+    private void Awake()
+    {
+        if (Static != null)
+        {
             Destroy(this);
         }
-        else {
+        else
+        {
             Static = this;
         }
+    }
+
+    // Use this for initialization
+    void Start () {
         //boardSize = new Vector2(Screen.width, Screen.height * 0.5f);
         boardSize = new Vector2(Screen.width, 0 );
         serializeBag();
-
-
 
     }
 	

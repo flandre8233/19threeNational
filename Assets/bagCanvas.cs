@@ -90,7 +90,7 @@ public class bagCanvas : MonoBehaviour////(1)
     public void OnPointerEnter(PointerEventData eventData)
     {
         ButtonEventData = eventData;
-        Debug.Log("Enter");
+        //Debug.Log("Enter");
     }
 
     public void displayCardDetail()
