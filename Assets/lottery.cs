@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class lottery : MonoBehaviour {
     public static lottery Static;
@@ -35,11 +35,19 @@ public class lottery : MonoBehaviour {
         }
 
         playerData.Static.magicStone -= cost;
-         playerData.Static.playerCardData.Add( lotteryTotal[itemAndEnemyProcessor.RandomProbabilitySystem(lotteryPro) - 1  ].GetComponent<CardData>() );
+        CardData hitCard = lotteryTotal[itemAndEnemyProcessor.RandomProbabilitySystem(lotteryPro) - 1].GetComponent<CardData>();
+         playerData.Static.playerCardData.Add(hitCard);
         //Debug.Log(playerData.Static.playerCardData[playerData.Static.playerCardData.Count - 1].Type);
+        cardNameDisplay.text = "恭喜你中了：" + hitCard.cardName;
+        cardImageDisplay.sprite = hitCard.bigPic.GetComponent<Image>().sprite;
+        cardImageDisplay.SetNativeSize();
+        cardImageDisplay.color = new Color(1,1,1,1);
+
+
         Debug.Log(playerData.Static.playerCardData.Count );
     }
-
+    public Text cardNameDisplay;
+    public Image cardImageDisplay;
 
 	// Update is called once per frame
 	void Update () {

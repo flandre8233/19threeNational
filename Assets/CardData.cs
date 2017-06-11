@@ -22,6 +22,7 @@ public class CardData : MonoBehaviour
 
     public float Probability;
 
+    public string skillDefault;
     
     public GameObject bigPic;
     public GameObject smallPic;

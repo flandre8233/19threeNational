@@ -14,4 +14,11 @@ public class lottert_UI_script : MonoBehaviour {
 	void Update () {
         stone_count.text = "You have " + playerData.Static.magicStone + " Magic Stone";
     }
+
+    public GameObject menuObject;
+    public void openClose()
+    {
+        menuObject.SetActive(!menuObject.activeSelf);
+    }
+
 }

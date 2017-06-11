@@ -18,6 +18,8 @@ public class bagCanvas : MonoBehaviour////(1)
     public Text attackText;
     public Text ResilienceText;
     public Text nameText;
+    public Text Skill;
+    public Text SKILLCD;
 
     public Text curLevelText;
 
@@ -153,7 +155,8 @@ public class bagCanvas : MonoBehaviour////(1)
         HPText.text = displayCardData.HP.ToString();
         attackText.text = displayCardData.ATK.ToString();
         ResilienceText.text = displayCardData.restone.ToString();
-
+        Skill.text = allCharData.Static.allCardData[displayCardData.Index].GetComponent<CardData>().skillDefault;
+        SKILLCD.text = allCharData.Static.allCardData[displayCardData.Index].GetComponent<CardData>().skillCD.ToString();
         curLevelText.text = displayCardData.level.ToString();
     }
 

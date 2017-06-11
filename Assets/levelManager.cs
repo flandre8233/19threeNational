@@ -48,7 +48,7 @@ public class levelManager : MonoBehaviour {
 
     public void enterFloor()
     {
-        Instantiate(allEnemyData.Static.allEnemyDatas[currentFloor], monsterDisplayRectTransform.transform);
+        Instantiate(allEnemyData.Static.allEnemyDatas[allLevelData.Static.allLevelDataList[currentLevelIndex].floorDetails[currentFloor].monsterID], monsterDisplayRectTransform.transform);
 
     }
 

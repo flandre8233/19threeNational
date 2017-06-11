@@ -49,6 +49,19 @@ public class AllSkillData : MonoBehaviour {
         changeSpecificBead(type.wind, type.water);
     }
 
+    public void allToFire()
+    {
+        changeAllBead(type.fire);
+    }
+    public void allToWater()
+    {
+        changeAllBead(type.water);
+    }
+    public void allToWind()
+    {
+        changeAllBead(type.wind);
+    }
+
     void replaceBead(type toType , GameObject bead)
     {
         switch (toType)

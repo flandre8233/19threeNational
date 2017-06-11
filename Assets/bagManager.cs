@@ -42,7 +42,8 @@ public class bagManager : MonoBehaviour
                 Debug.Log(i + "/" + J);
                 boardData item = new boardData();
                 //item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * Screen.width), -i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * (Screen.width - 100)), -i * (boardSize.x / boardWidthNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber), -i * (boardSize.x / boardWidthNumber) ) ;
+                Debug.Log(item.position);
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 //item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
@@ -106,6 +107,7 @@ public class bagManager : MonoBehaviour
         //GameObject go = Instantiate(spawnObject, bagContent.transform);
         boardData.haveBead = go;
         displayData.inBagIndex = boardData.index;
+        go.GetComponent<RectTransform>().pivot = new Vector2(0.5f,0.5f);
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
         go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
 

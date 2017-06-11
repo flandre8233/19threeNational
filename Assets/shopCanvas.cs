@@ -12,10 +12,19 @@ public class shopCanvas : MonoBehaviour {
     public int randomCoinRangeMix;
     public int randomCoinRangeMax;
 
+    int alreadySelectedType;
+
     public class payButtonDetails
     {
         public int costMoney { get; set; }
         public int magicStone { get; set; }
+    }
+
+    public GameObject menuObject;
+    public void openClose(int number)
+    {
+        alreadySelectedType = number;
+        menuObject.SetActive(!menuObject.activeSelf);
     }
 
     void SerializePayButton() {
@@ -52,36 +61,36 @@ public class shopCanvas : MonoBehaviour {
         playerData.Static.coin += Random.Range(randomCoinRangeMix,randomCoinRangeMax);
     }
 
-    public void payButton(int buttonType) {
-        switch (buttonType) {
+    public void payButton() {
+        switch (alreadySelectedType) {
             case 0:
                 //8hkd
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 break;
             case 1:
                 //35hkd                
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 break;
             case 2:
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 //55hkd
                 break;
             case 3:
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 //142hkd
                 break;
             case 4:
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 //270hkd
                 break;
             case 5:
-                playerData.Static.magicStone += payButtonArray[buttonType].magicStone;
-                playerData.Static.moneyPayTotal += payButtonArray[buttonType].costMoney;
+                playerData.Static.magicStone += payButtonArray[alreadySelectedType].magicStone;
+                playerData.Static.moneyPayTotal += payButtonArray[alreadySelectedType].costMoney;
                 //356hkd
                 break;
         }
