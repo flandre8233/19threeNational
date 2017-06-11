@@ -78,7 +78,7 @@ public class boardManager : MonoBehaviour {
             for (int J = 0; J < (boardWidthNumber ) ; J++) {
                 //Debug.Log(i+"/"+J );
                 boardData item = new boardData();
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x/100) * canvasScaler.referenceResolution.x), - i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * canvasScaler.referenceResolution.y ));
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * canvasScaler.referenceResolution.x), -i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * canvasScaler.referenceResolution.y));
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;

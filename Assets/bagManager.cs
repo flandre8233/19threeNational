@@ -20,13 +20,16 @@ public class bagManager : MonoBehaviour
     public boardData[,] bagDataArray;
 
     public Canvas gameCanvas;
-
+    public GameObject emptyObject;
 
 
     Vector2 boardSize; //背包總大小 pixel
     Vector2 cardSmallPicSize;
     public Vector2 boardStartPoint;
     public Vector2 boardSizeNumber; // 橫 直 有幾多粒
+
+
+    int sizeDeltaY = 0;
 
     void setBoard(int boardWidthNumber, int boardHeightNumber) {
         bagDataArray = new boardData[boardWidthNumber, boardHeightNumber];
@@ -35,14 +38,17 @@ public class bagManager : MonoBehaviour
 
         for (int i = 0; i < (boardHeightNumber); i++) {
             for (int J = 0; J < (boardWidthNumber); J++) {
+
                 Debug.Log(i + "/" + J);
                 boardData item = new boardData();
                 //item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * Screen.width), -i * (boardSize.y / boardHeightNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
-                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * Screen.width), -i * (boardSize.x / boardWidthNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
+                item.position = new Vector2(J * (boardSize.x / boardWidthNumber) + (int)((boardStartPoint.x / 100) * (Screen.width - 100)), -i * (boardSize.x / boardWidthNumber) - (int)((boardStartPoint.y / 100) * Screen.height));
                 item.positionCenter = item.position;
                 item.positionCenter.x += (boardSize.x / boardWidthNumber) / 2;
                 //item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
-                item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
+
+                item.positionCenter.y = 0;
+               // item.positionCenter.y -= (boardSize.y / boardHeightNumber) / 2;
 
                 item.index = new Vector2(J, i);
                 bagDataArray[J, i] = item;
@@ -50,7 +56,8 @@ public class bagManager : MonoBehaviour
             }
         }
         //cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber) - 20, (boardSize.y / boardHeightNumber) - 20 );
-        cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber) - 40, (boardSize.x / boardWidthNumber) - 40 );
+        cardSmallPicSize = new Vector2((boardSize.x / boardWidthNumber) - 20, (boardSize.x / boardWidthNumber) - 20 );
+        sizeDeltaY = (int)((boardSize.x / boardWidthNumber) - 20) ;
     }
 
     public GameObject displayObject;
@@ -61,28 +68,48 @@ public class bagManager : MonoBehaviour
         List<boardData> totalEmptyGridIndex = getTotalEmptyGridIndex(bagDataArray);
 
         int i = 0;
-        foreach (var item in playerData.Static.playerCardData) {
-            createCard(totalEmptyGridIndex[0],item.smallPic.GetComponent<Image>().sprite,item,i);
-            //createCard(allCharData.Static.allCardData[item.GetComponent<CardData>().Index], totalEmptyGridIndex[0]);
-            Debug.Log(totalEmptyGridIndex.Count + "/" + totalEmptyGridIndex[0].positionCenter);
-            totalEmptyGridIndex.RemoveAt(0);
+        for (int y = 0; y < (boardSizeNumber.y); y++)
+        {
+            GameObject row = Instantiate(emptyObject, bagContent.transform);
+            for (int x = 0; x < (boardSizeNumber.x);x++)
+            {
+                if ((int)((y * boardSizeNumber.x) + x) >= playerData.Static.playerCardData.Count )
+                {
+                    break;
+                }
+                if (playerData.Static.playerCardData[(int)( (y*boardSizeNumber.x) +x)] == null)
+                {
+                    continue;
+                }
+                CardData item = playerData.Static.playerCardData[(int)(y * boardSizeNumber.x + x)] ;
 
-            i++;
+                GameObject card = createCard(row,totalEmptyGridIndex[0], item.smallPic.GetComponent<Image>().sprite, item, i);
+                //createCard(allCharData.Static.allCardData[item.GetComponent<CardData>().Index], totalEmptyGridIndex[0]);
+                Debug.Log(totalEmptyGridIndex.Count + "/" + totalEmptyGridIndex[0].positionCenter);
+                totalEmptyGridIndex.RemoveAt(0);
+
+                i++;
+
+            }
+            
+            row.GetComponent<RectTransform>().sizeDelta = new Vector2(0, sizeDeltaY);
         }
+
 
     }
 
     public GameObject bagContent;
 
-    void createCard( boardData boardData,Sprite image,CardData objectCardData,int inBagIndex) {
-        GameObject go = Instantiate(displayObject, bagContent.transform);
-        propertyData.Static.addProperty(go, objectCardData.Type);
+    GameObject createCard( GameObject parent, boardData boardData,Sprite image,CardData objectCardData,int inBagIndex) {
+        GameObject go = Instantiate(displayObject, parent.transform);
         bagDisplayData displayData = go.GetComponent<bagDisplayData>();
         //GameObject go = Instantiate(spawnObject, bagContent.transform);
         boardData.haveBead = go;
         displayData.inBagIndex = boardData.index;
         go.GetComponent<RectTransform>().anchoredPosition = boardData.positionCenter;
         go.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
+
+        propertyData.Static.addProperty(go, objectCardData.Type);
         /*
         go.GetComponent<CardData>().smallPic.GetComponent<RectTransform>().sizeDelta = cardSmallPicSize;
         go.GetComponent<CardData>().smallPic.SetActive(true);
@@ -91,6 +118,8 @@ public class bagManager : MonoBehaviour
         go.GetComponent<Button>().onClick.AddListener(bagCanvas.Static.cardButton); //加入 onclick listener;
         go.GetComponent<Image>().sprite = image;
         deepCopy(inBagIndex,ref displayData, objectCardData);
+
+        return go;
     }
 
 
@@ -136,7 +165,7 @@ public class bagManager : MonoBehaviour
     // Use this for initialization
     void Start () {
         //boardSize = new Vector2(Screen.width, Screen.height * 0.5f);
-        boardSize = new Vector2(Screen.width, 0 );
+        boardSize = new Vector2( (Screen.width- 100), 0 );
         serializeBag();
 
     }
