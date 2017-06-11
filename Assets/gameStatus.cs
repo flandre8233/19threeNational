@@ -6,6 +6,8 @@ public class gameStatus : MonoBehaviour {
     public static gameStatus Static;
     public bool alreadyOpenTitle;
 
+
+
     private void Awake()
     {
         if (Static != null)
